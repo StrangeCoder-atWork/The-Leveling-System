@@ -64,7 +64,7 @@ export default function EditProfilePage() {
       transition={{ duration: 0.5 }}
       className="min-h-screen"
       style={{
-        backgroundImage: `url(${current.backgroundImage || '/bg3.jpg'})`,
+        backgroundImage: `url(${current.backgroundImage || '/Peacebg.jpg'})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}

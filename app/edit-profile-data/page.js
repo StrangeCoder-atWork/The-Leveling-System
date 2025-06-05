@@ -74,7 +74,7 @@ export default function EditProfileDataPage() {
       transition={{ duration: 0.5 }}
       className="min-h-screen"
       style={{
-        backgroundImage: `url(${current.backgroundImage || '/bg3.jpg'})`,
+        backgroundImage: `url(${current.backgroundImage || '/Spacebg1.jpg'})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}
