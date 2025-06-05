@@ -1,0 +1,228 @@
+.card:hover {
+	transition: linear;
+	transition-duration: 0.3s;
+	background: radial-gradient(rgb(112, 112, 112), black);
+	color: white;
+}
+.card{
+	position: relative;
+	margin-left: 10px;
+	font-family:Poppins;
+	color: rgb(76, 77, 78);
+	align-items: center;
+	align-content: center;
+	text-align: center;
+	top:7vh;
+	border-radius: 3.5px;
+	transition: ease-in;
+	transition-duration: 0.3s;
+	font-weight: 700;
+	font-size:medium;
+	border: 1px solid transparent;
+	box-shadow: 0px 0px 20px 8px rgba(0, 0, 0, 0.328),
+	4px 0px 20px 8px rgba(0, 0, 0, 0.255),0px 0px 20px 8px rgba(0, 0, 0, 0.157)
+	,4px 0px 20px 8px rgba(0, 0, 0, 0.173),8px 0px 20px 8px rgba(0, 0, 0, 0.06);
+	
+}
+.cardSpace:hover {
+	font-size: large;
+	background-color: rgba(0, 0, 0, 0.182);
+	box-shadow: 10px 10px 21px rgb(0, 0, 0);
+	color: rgb(195, 0, 255);
+}
+.cardSpace{
+	position: relative;
+	margin-left: 10px;
+	font-family:Poppins;
+	color: rgb(0, 149, 255);
+	align-items: center;
+	align-content: center;
+	text-align: center;
+	top:7vh;
+	border-radius: 3.5px;
+	transition: ease-in;
+	transition-duration: 0.3s;
+	font-weight: 700;
+	font-size:medium;
+	border: 1px solid transparent;
+	background:linear-gradient(#01122600, #01173400) padding-box,linear-gradient(to right,rgba(255, 42, 0, 0.595), rgba(255, 166, 0, 0.68)) border-box ;
+	box-shadow:0 0 5px rgba(0, 98, 255, 0.337);
+	
+}
+.cardClassic{
+	background-image: url("/Classicbg3.jpg");
+	color: burlywood;
+	position: relative;
+	margin-left: 10px;
+	font-family:Poppins;
+	align-items: center;
+	align-content: center;
+	text-align: center;
+	top:7vh;
+	border-radius: 3.5px;
+	transition: ease-in;
+	transition-duration: 0.3s;
+	font-weight: 700;
+	font-size:small;
+	box-shadow:0 0 5px rgba(250, 160, 70, 0.337);
+}
+.cardClassic:hover{
+	font-weight: 800;
+	font-size:medium;
+	border: 1px solid transparent;
+	box-shadow:0 0 5px rgb(0, 98, 255);
+}
+.cardAshes{
+	background-color: rgb(28, 74, 93);
+	color: rgb(73, 170, 218);
+	position: relative;
+	margin: 10px;
+	font-family:Poppins;
+	align-items: center;
+	align-content: center;
+	text-align: center;
+	top:7vh;
+	border-radius: 3.5px;
+	transition: ease-in;
+	transition-duration: 0.3s;
+	font-weight: 700;
+	font-size:medium;
+	box-shadow:0 0 5px rgba(250, 160, 70, 0.337);
+}
+.cardAshes:hover{
+	font-weight: 700;
+	font-size:large;
+	color: orangered;
+	border: 1px solid transparent;
+	box-shadow:0 0 10px rgba(250, 62, 0, 0.832);
+}
+.cardTech{
+	background-color: rgba(255, 138, 35, 0);
+	color: rgba(141, 240, 240, 0.817);
+	position: relative;
+	margin: 10px;
+	font-family:Poppins;
+	align-items: center;
+	align-content: center;
+	text-align: center;
+	top:7vh;
+	border-radius: 3.5px;
+	transition: ease-in;
+	transition-duration: 0.3s;
+	font-weight: 700;
+	font-size:medium;
+	box-shadow:0 0 5px rgba(250, 160, 70, 0.337);
+}
+.cardTech:hover{
+	color: rgb(255, 46, 46);
+	font-size:large;
+	border: 1px solid transparent;
+	box-shadow:0 0 10px rgb(209, 118, 118);
+}
+.cardPeace{
+	background-color: rgba(255, 138, 35, 0);
+	color: rgba(141, 240, 240, 0.817);
+	position: relative;
+	margin: 10px;
+	font-family:Poppins;
+	align-items: center;
+	align-content: center;
+	text-align: center;
+	top:7vh;
+	border-radius: 3.5px;
+	transition: ease-in;
+	transition-duration: 0.3s;
+	font-weight: 700;
+	font-size:medium;
+	box-shadow:0 0 5px rgba(250, 160, 70, 0.337);
+}
+.cardPeace:hover{
+	color: rgb(38, 203, 90);
+	font-size:large;
+	border: 1px solid transparent;
+	box-shadow:0 0 10px rgb(118, 209, 133);
+}
+.cardAnime{
+	background-color: rgba(255, 174, 229, 0.688);
+	color: rgba(255, 255, 255, 0.817);
+	position: relative;
+	margin: 20px;
+	font-family:Poppins;
+	align-items: center;
+	align-content: center;
+	text-align: center;
+	top:7vh;
+	border-radius: 3.5px;
+	transition: ease-in;
+	transition-duration: 0.3s;
+	font-weight: 700;
+	font-size:large;
+	box-shadow:0 0 5px rgba(250, 160, 70, 0.337);
+}
+.cardAnime:hover{
+	background-color: rgba(254, 254, 254, 0.868);
+	color: rgb(252, 139, 235);
+	font-size:larger;
+	border: 1px solid transparent;
+	box-shadow:0 0 10px rgb(205, 118, 209);
+}
+.cardMythical{
+	background-color: rgba(138, 60, 221, 0.688);
+	z-index: 100;
+	color: rgba(255, 255, 255, 0.817);
+	position: relative;
+	margin: 20px;
+	font-family:Poppins;
+	align-items: center;
+	align-content: center;
+	text-align: center;
+	top:7vh;
+	border-radius: 3.5px;
+	transition: ease-in;
+	transition-duration: 0.3s;
+	font-weight: 700;
+	font-size:large;
+	box-shadow:0 0 5px rgba(250, 160, 70, 0.337);
+}
+.cardMythical:hover{
+	background-color: rgba(254, 254, 254, 0.868);
+	color: rgb(150, 62, 251);
+	font-size:larger;
+	border: 1px solid transparent;
+	box-shadow:0 0 10px rgb(205, 118, 209);
+}
+.cardJapan{
+	background-color: rgba(249, 155, 72, 0.688);
+	z-index: 10;
+	color: rgba(255, 255, 255, 0.817);
+	position: relative;
+	margin: 20px;
+	font-family:Poppins;
+	align-items: center;
+	align-content: center;
+	text-align: center;
+	top:7vh;
+	border-radius: 3.5px;
+	transition: ease-in;
+	transition-duration: 0.3s;
+	font-weight: 700;
+	font-size:large;
+	box-shadow:0 0 5px rgba(250, 160, 70, 0.337);
+}
+.cardJapan:hover{
+	background-color: rgba(255, 220, 174, 0.868);
+	color: rgb(248, 132, 42);
+	font-size:larger;
+	border: 1px solid transparent;
+	box-shadow:0 0 10px rgb(243, 204, 95);
+}
+@keyframes float {
+	to{
+		transform: translateY(10px);
+	}
+}
+@keyframes Zoom {
+	to{
+		transform: scale(1.5);
+	}
+}

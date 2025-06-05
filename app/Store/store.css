@@ -1,0 +1,51 @@
+.container {
+	/* margin-top: -30px; */
+	width: 100vw;
+	background: url(/bg2.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: auto;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap:20px;
+
+}
+.store_title{
+	font-family:cursive;
+}
+.items{
+	background:linear-gradient(#00000031, rgba(255, 255, 255, 0.266)) padding-box,linear-gradient(to right,rgba(255, 255, 255, 0.26), rgba(0, 0, 0, 0.266)) border-box ;
+	border-radius:10px ;
+	font-family: Poppins;
+	border:2px solid black;
+	transition: linear 0.1s;
+}
+.items:hover{
+	transform: scale(1.03);
+}
+.button-item{
+	font-family: Poppins;
+	align-content: center;
+	font-weight: 500;
+	border-radius:7px ;
+	border:2px solid rgba(0, 174, 255, 0);
+	transition: ease-in;
+	background:linear-gradient(#ffffff, #ffffff) padding-box,linear-gradient(to right,rgb(0, 0, 0), rgb(0, 0, 0)) border-box ;
+	transition-duration: 0.1s;
+	box-shadow:0 0 5px rgb(0, 0, 0);
+}
+.button-item:hover{
+	background: #000000a9;
+	transform: scale(1.1);
+	color: #ffffff;
+}
+.price{
+	font-weight: 300;
+}
+.Img{
+	border:1px solid transparent;
+	border-radius: 5rem;
+	padding:0;
+	background:linear-gradient(#ffffff, #ffffff) padding-box,linear-gradient(to right,rgb(0, 0, 0), rgb(0, 0, 0)) border-box ;
+	filter: drop-shadow(0 0 5px rgb(255, 255, 255));
+}

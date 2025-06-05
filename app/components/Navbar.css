@@ -1,0 +1,36 @@
+.logo{
+	position: relative;
+}
+.Username_navbar{
+	margin-top: 0.2rem;
+	position: relative;
+}
+.Nav{
+	background: #0e022463;
+}
+.NavSpace{
+	background: #000000;
+}
+.NavClassic{
+	background-image: url("/Classicbg3.jpg");
+	color: burlywood;
+}
+.NavPeace{
+	background-image: url("/PeaceNav.jpg");
+	color: rgb(60, 206, 160);
+	background-repeat: no-repeat;
+
+	background-size: cover;
+}
+.NavAshes{
+	background: #000;
+	color: rgb(154, 221, 254);
+}
+.NavAnime{
+	background: #f4daedd0;
+	color: rgb(255, 80, 202);
+}
+.NavJapan{
+	background: #fcae3963;
+	color: rgb(254, 100, 17);
+}

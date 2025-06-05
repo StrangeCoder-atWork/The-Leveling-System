@@ -1,0 +1,88 @@
+.FullIntroText{
+	top:40vh;
+	position: relative;
+}
+.continue{
+	justify-self: center;
+	align-self: center;
+}
+.glowIntroL{
+	animation: glowIntroL ease-in-out 2s infinite alternate;
+	filter: blur(3px); /* Reduced blur for more neon-like effect */
+	box-shadow: 0 0 15px 5px rgba(59, 130, 246, 0.95); /* More intense, focused glow */
+}
+.glowIntroR{
+	animation: glowIntroR 2s ease-in-out infinite alternate;
+	filter: blur(3px); /* Reduced blur for more neon-like effect */
+	box-shadow: 0 0 15px 5px rgba(168, 85, 247, 0.95); /* More intense, focused glow */
+}
+
+/* Update keyframes for more neon-like effect */
+@keyframes glowIntroL{
+	0% {
+      width: 1px;
+      box-shadow: 0 0 10px 3px rgba(59, 130, 246, 0.9);
+    }
+	100% {
+      width: 5px; /* Reduced width for sharper neon effect */
+      box-shadow: 0 0 20px 6px rgba(59, 130, 246, 1.0);
+	}
+}
+@keyframes glowIntroR{
+	0% {
+      width: 1px;
+      box-shadow: 0 0 10px 3px rgba(168, 85, 247, 0.9);
+    }
+	100% {
+      width: 5px; /* Reduced width for sharper neon effect */
+      box-shadow: 0 0 20px 6px rgba(168, 85, 247, 1.0);
+	}
+}
+.IntroshortText{
+	transition: linear 1s;
+	animation: blink 5s 1 alternate;
+	color: white;
+	font-size: 55px;
+	text-shadow: 0 0 10px rgba(255, 255, 255, 0.7),
+               0 0 20px rgba(59, 130, 246, 0.5),
+               0 0 30px rgba(168, 85, 247, 0.3);
+}
+.introText{
+	top:40vh;
+	position: relative;
+	transition: linear 1s;
+	animation: blink1 5s 1 alternate;
+	color: white;
+	font-size: 70px;
+	text-shadow: 0 0 10px rgba(255, 255, 255, 0.7),
+               0 0 20px rgba(59, 130, 246, 0.5),
+               0 0 30px rgba(168, 85, 247, 0.3);
+}
+@keyframes blink{
+	from{
+		font-size: 50px;
+		color:transparent;
+		text-shadow: none;
+	}
+	to{
+		font-size: 55px;
+		color: white;
+		text-shadow: 0 0 10px rgba(255, 255, 255, 0.7),
+                 0 0 20px rgba(59, 130, 246, 0.5),
+                 0 0 30px rgba(168, 85, 247, 0.3);
+	}
+}
+@keyframes blink1{
+	from{
+		font-size: 60px;
+		color:transparent;
+		text-shadow: none;
+	}
+	to{
+		font-size: 70px;
+		color: white;
+		text-shadow: 0 0 10px rgba(255, 255, 255, 0.7),
+                 0 0 20px rgba(59, 130, 246, 0.5),
+                 0 0 30px rgba(168, 85, 247, 0.3);
+	}
+}
