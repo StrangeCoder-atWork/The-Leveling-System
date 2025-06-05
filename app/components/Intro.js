@@ -8,7 +8,8 @@ import { themes } from '@/data/themes';
 export default function Intro({ onComplete }) {
   const [step, setStep] = useState(1);
   const [showContinue, setShowContinue] = useState(false);
-  const [currentTextIndex, setCurrentTextIndex] = useState(0); // New state for sequential text
+  const [currentTextIndex, setCurrentTextIndex] = useState(0);
+  const [showCurrentText, setShowCurrentText] = useState(true); // New state to control text visibility for fade effect
   const { theme } = useTheme();
   const currentTheme = themes[theme];
   const audioRef = useRef(null);
@@ -41,24 +42,34 @@ export default function Intro({ onComplete }) {
 
     let timers = [];
 
-    // Display intro texts sequentially
-    introTexts.forEach((text, index) => {
-      const delay = index * 2000; // 2 seconds per line
-      timers.push(setTimeout(() => {
+    const displayNextText = (index) => {
+      if (index < introTexts.length) {
         setCurrentTextIndex(index);
-      }, delay));
-    });
+        setShowCurrentText(true); // Show current text
 
-    // After all intro texts, transition to step 2
-    const totalIntroTextTime = introTexts.length * 2000; // Total time for all intro texts
-    timers.push(setTimeout(() => {
-      setStep(2);
-    }, totalIntroTextTime));
+        // Fade out after 4 seconds
+        timers.push(setTimeout(() => {
+          setShowCurrentText(false); // Hide current text
+        }, 4000));
 
-    // Show continue button after step 2 text is displayed
+        // Move to next text after 5 seconds (1 second after fade out starts)
+        timers.push(setTimeout(() => {
+          displayNextText(index + 1);
+        }, 5000));
+      } else {
+        // All intro texts displayed, transition to step 2
+        setStep(2);
+        // Show continue button immediately after step 2 text is displayed
+        timers.push(setTimeout(() => {
+          setShowContinue(true);
+        }, 1000)); // Give a small delay for step 2 text to appear
+      }
+    };
+
+    // Start displaying texts after a short initial delay
     timers.push(setTimeout(() => {
-      setShowContinue(true);
-    }, totalIntroTextTime + 2000)); // 2 seconds after step 2 starts
+      displayNextText(0);
+    }, 1000));
 
     return () => {
       timers.forEach(timer => clearTimeout(timer));
@@ -100,17 +111,18 @@ export default function Intro({ onComplete }) {
               transition={{ duration: 1 }}
               className="FullIntroText flex flex-col justify-center items-center h-full"
             >
-              {introTexts.slice(0, currentTextIndex + 1).map((text, index) => (
+              {showCurrentText && (
                 <motion.p
-                  key={index}
+                  key={currentTextIndex} // Key change to re-trigger animation for each text
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="text-xl md:text-2xl font-bold text-white mb-2"
+                  exit={{ opacity: 0, y: -20 }} // Fade out animation
+                  transition={{ duration: 1 }}
+                  className="text-4xl md:text-6xl font-bold text-white mb-2"
                 >
-                  {text}
+                  {introTexts[currentTextIndex]}
                 </motion.p>
-              ))}
+              )}
             </motion.div>
           )}
 
@@ -123,7 +135,7 @@ export default function Intro({ onComplete }) {
               className="introText"
             >
               <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-                Your Journey Begins
+                Your Journey Begins Now
               </h1>
               <p className="text-xl md:text-2xl text-white/80 mb-8">
                 Transform your productivity into an epic adventure

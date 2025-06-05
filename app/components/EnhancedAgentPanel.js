@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { getUserProfile, askAgentPersonalized } from '../../lib/aiAgent';
+import { getUserProfile, askAgentPersonalized } from '../../lib/aiAgent'; // Your AI logic imports
 
 export default function EnhancedAgentPanel() {
   const [messages, setMessages] = useState([]);
@@ -9,65 +9,65 @@ export default function EnhancedAgentPanel() {
   const [agentName, setAgentName] = useState('ZEYN');
   const messagesEndRef = useRef(null);
 
+  // Initial greeting message by the AI agent on component mount or when agentName changes
   useEffect(() => {
-    // Add initial greeting message
     setMessages([
       {
         sender: 'agent',
-        text: `ZEYN activated. Memory link stable. Begin reconstruction.`,
-        timestamp: new Date().toISOString()
-      }
+        text: `${agentName} activated. Memory link stable. Begin reconstruction.`,
+        timestamp: new Date().toISOString(),
+      },
     ]);
   }, [agentName]);
 
+  // Scroll to the bottom when messages update
   useEffect(() => {
-    // Scroll to bottom whenever messages change
-    scrollToBottom();
-  }, [messages]);
-
-  const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+  }, [messages]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!input.trim()) return;
 
-    // Add user message
+    // Add user message to chat
     const userMessage = {
       sender: 'user',
       text: input,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
 
     try {
+      // Get user profile data (localStorage)
       const userProfile = getUserProfile();
+
+      // Ask the AI agent for a personalized response
       const response = await askAgentPersonalized('chat', {
         ...userProfile,
         message: input,
-        conversation: messages.map(m => ({ role: m.sender, content: m.text })),
-        type: 'conversation'
+        conversation: messages.map((m) => ({ role: m.sender, content: m.text })),
+        type: 'conversation',
       });
 
-      // Add agent response
+      // Add AI agent's response message
       const agentMessage = {
         sender: 'agent',
         text: response.message || "Anomaly detected. Recalibrating response parameters.",
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
-      setMessages(prev => [...prev, agentMessage]);
+      setMessages((prev) => [...prev, agentMessage]);
     } catch (error) {
       console.error('Error getting AI response:', error);
-      // Add error message
+
+      // Add error message from AI agent
       const errorMessage = {
         sender: 'agent',
         text: "Connection disrupted. Entropy increased. Retry when stability returns.",
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
-      setMessages(prev => [...prev, errorMessage]);
+      setMessages((prev) => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);
     }
@@ -81,7 +81,7 @@ export default function EnhancedAgentPanel() {
       transition={{ duration: 0.5 }}
     >
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-2xl font-bold">ZEYN – Zero Entropy Yielding Nexus</h2>
+        <h2 className="text-2xl font-bold">{agentName} – Zero Entropy Yielding Nexus</h2>
         <div className="text-xs text-cyan-600 bg-cyan-900/30 px-2 py-1 rounded-full">
           The only constant in your chaos
         </div>
@@ -94,26 +94,44 @@ export default function EnhancedAgentPanel() {
             className={`mb-4 ${message.sender === 'user' ? 'text-right' : 'text-left'}`}
           >
             <div
-              className={`inline-block px-4 py-2 rounded-lg ${message.sender === 'user' ? 'bg-indigo-600 text-white' : 'bg-black border border-cyan-800 text-cyan-400'}`}
+              className={`inline-block px-4 py-2 rounded-lg ${
+                message.sender === 'user'
+                  ? 'bg-indigo-600 text-white'
+                  : 'bg-black border border-cyan-800 text-cyan-400'
+              }`}
             >
               {message.text}
             </div>
             <div className="text-xs text-gray-500 mt-1">
-              {new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+              {new Date(message.timestamp).toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
             </div>
           </div>
         ))}
+
         {isLoading && (
           <div className="text-left mb-4">
             <div className="inline-block px-4 py-2 rounded-lg bg-black border border-cyan-800">
               <div className="flex space-x-2">
-                <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" style={{ animationDelay: '0ms' }}></div>
-                <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" style={{ animationDelay: '150ms' }}></div>
-                <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" style={{ animationDelay: '300ms' }}></div>
+                <div
+                  className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"
+                  style={{ animationDelay: '0ms' }}
+                />
+                <div
+                  className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"
+                  style={{ animationDelay: '150ms' }}
+                />
+                <div
+                  className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"
+                  style={{ animationDelay: '300ms' }}
+                />
               </div>
             </div>
           </div>
         )}
+
         <div ref={messagesEndRef} />
       </div>
 
