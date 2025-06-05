@@ -1,6 +1,11 @@
 .FullIntroText{
-	top:40vh;
-	position: relative;
+	/* top:40vh; */
+	/* position: relative; */
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh; /* Ensure it takes full viewport height for centering */
 }
 .continue{
 	justify-self: center;
@@ -48,8 +53,8 @@
                0 0 30px rgba(168, 85, 247, 0.3);
 }
 .introText{
-	top:40vh;
-	position: relative;
+	/* top:40vh; */
+	/* position: relative; */
 	transition: linear 1s;
 	animation: blink1 5s 1 alternate;
 	color: white;

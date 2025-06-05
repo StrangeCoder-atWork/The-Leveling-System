@@ -6,13 +6,13 @@
 }
 .card{
 	position: relative;
-	margin-left: 10px;
+	margin-left: 7px;
 	font-family:Poppins;
 	color: rgb(76, 77, 78);
 	align-items: center;
 	align-content: center;
 	text-align: center;
-	top:7vh;
+	top:5vh;
 	border-radius: 3.5px;
 	transition: ease-in;
 	transition-duration: 0.3s;
@@ -32,13 +32,13 @@
 }
 .cardSpace{
 	position: relative;
-	margin-left: 10px;
+	margin-left: 7px;
 	font-family:Poppins;
 	color: rgb(0, 149, 255);
 	align-items: center;
 	align-content: center;
 	text-align: center;
-	top:7vh;
+	top:5vh;
 	border-radius: 3.5px;
 	transition: ease-in;
 	transition-duration: 0.3s;
@@ -53,22 +53,22 @@
 	background-image: url("/Classicbg3.jpg");
 	color: burlywood;
 	position: relative;
-	margin-left: 10px;
+	margin-left: 7px;
 	font-family:Poppins;
 	align-items: center;
 	align-content: center;
 	text-align: center;
-	top:7vh;
+	top:5vh;
 	border-radius: 3.5px;
 	transition: ease-in;
 	transition-duration: 0.3s;
 	font-weight: 700;
-	font-size:small;
+	font-size:medium;
 	box-shadow:0 0 5px rgba(250, 160, 70, 0.337);
 }
 .cardClassic:hover{
 	font-weight: 800;
-	font-size:medium;
+	font-size:large;
 	border: 1px solid transparent;
 	box-shadow:0 0 5px rgb(0, 98, 255);
 }
@@ -76,12 +76,12 @@
 	background-color: rgb(28, 74, 93);
 	color: rgb(73, 170, 218);
 	position: relative;
-	margin: 10px;
+	margin: 7px;
 	font-family:Poppins;
 	align-items: center;
 	align-content: center;
 	text-align: center;
-	top:7vh;
+	top:5vh;
 	border-radius: 3.5px;
 	transition: ease-in;
 	transition-duration: 0.3s;
@@ -100,12 +100,12 @@
 	background-color: rgba(255, 138, 35, 0);
 	color: rgba(141, 240, 240, 0.817);
 	position: relative;
-	margin: 10px;
+	margin: 7px;
 	font-family:Poppins;
 	align-items: center;
 	align-content: center;
 	text-align: center;
-	top:7vh;
+	top:5vh;
 	border-radius: 3.5px;
 	transition: ease-in;
 	transition-duration: 0.3s;
@@ -123,12 +123,12 @@
 	background-color: rgba(255, 138, 35, 0);
 	color: rgba(141, 240, 240, 0.817);
 	position: relative;
-	margin: 10px;
+	margin: 7px;
 	font-family:Poppins;
 	align-items: center;
 	align-content: center;
 	text-align: center;
-	top:7vh;
+	top:5vh;
 	border-radius: 3.5px;
 	transition: ease-in;
 	transition-duration: 0.3s;
@@ -146,12 +146,12 @@
 	background-color: rgba(255, 174, 229, 0.688);
 	color: rgba(255, 255, 255, 0.817);
 	position: relative;
-	margin: 20px;
+	margin: 15px;
 	font-family:Poppins;
 	align-items: center;
 	align-content: center;
 	text-align: center;
-	top:7vh;
+	top:5vh;
 	border-radius: 3.5px;
 	transition: ease-in;
 	transition-duration: 0.3s;
@@ -171,12 +171,12 @@
 	z-index: 100;
 	color: rgba(255, 255, 255, 0.817);
 	position: relative;
-	margin: 20px;
+	margin: 15px;
 	font-family:Poppins;
 	align-items: center;
 	align-content: center;
 	text-align: center;
-	top:7vh;
+	top:5vh;
 	border-radius: 3.5px;
 	transition: ease-in;
 	transition-duration: 0.3s;
@@ -196,12 +196,12 @@
 	z-index: 10;
 	color: rgba(255, 255, 255, 0.817);
 	position: relative;
-	margin: 20px;
+	margin: 15px;
 	font-family:Poppins;
 	align-items: center;
 	align-content: center;
 	text-align: center;
-	top:7vh;
+	top:5vh;
 	border-radius: 3.5px;
 	transition: ease-in;
 	transition-duration: 0.3s;
