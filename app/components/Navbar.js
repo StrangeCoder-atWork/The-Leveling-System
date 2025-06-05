@@ -57,7 +57,7 @@ const Navbar = (props) => {
               )}
             </div>
             <div className="relative ml-3">
-              <div className="h-10 w-10 rounded-full overflow-hidden border-2 border-white/20">
+              {/* <div className="h-10 w-10 rounded-full overflow-hidden border-2 border-white/20">
                 <Image 
                   src={profileImage} 
                   alt="Profile" 
@@ -68,7 +68,7 @@ const Navbar = (props) => {
                   unoptimized={profileImage.startsWith('data:')}
                   priority={true}
                 />
-              </div>
+              </div> */}
             </div>
           </div>
         ): (<h1 className="Username_navbar text-xl relative font-bold">User</h1>)}

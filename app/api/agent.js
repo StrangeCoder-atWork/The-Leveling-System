@@ -4,18 +4,40 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 export default async function handler(req, res) {
+  // Add CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Handle OPTIONS request for CORS preflight
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+
   if (req.method !== 'POST') {
-    res.status(405).json({ error: 'Method not allowed, use POST' });
+    res.status(405).json({ 
+      error: 'Method not allowed, use POST',
+      code: 'METHOD_NOT_ALLOWED',
+      allowedMethods: ['POST']
+    });
+    return;
+  }
+
+  if (!process.env.GEMINI_API_KEY) {
+    res.status(500).json({
+      error: 'AI service configuration missing',
+      code: 'CONFIG_ERROR'
+    });
     return;
   }
 
   const { section, userProfile } = req.body;
 
   if (!userProfile) {
-    res.status(200).json({
-      title: "Not Logged In",
-      message: "Please log in to get personalized advice.",
-      suggestion: "Log in or create an account to start your journey."
+    res.status(400).json({
+      error: 'User profile is required',
+      code: 'INVALID_REQUEST'
     });
     return;
   }
@@ -177,6 +199,13 @@ export default async function handler(req, res) {
       title: "System Disruption",
       message: "Connection unstable. Entropy increasing. Retry when signal stabilizes.",
       suggestion: "Continue with planned trajectory. Will reconnect when possible."
+    });
+  } catch (error) {
+    console.error('AI Agent Error:', error);
+    res.status(500).json({
+      error: 'AI service error',
+      code: 'AI_ERROR',
+      message: error.message
     });
   }
 }
