@@ -7,6 +7,7 @@ import uiReducer from './slices/uiSlice';
 import { localStorageMiddleware } from './middleware/localStorageMiddleware';
 
 // Load state from localStorage
+// Enhance error handling in loadState
 const loadState = () => {
   if (typeof window === 'undefined') return {};
   
@@ -14,19 +15,20 @@ const loadState = () => {
   if (!userId) return {};
   
   try {
-    const userState = localStorage.getItem(`userState_${userId}`);
-    const tasksState = localStorage.getItem(`tasksState_${userId}`);
-    const flashcardsState = localStorage.getItem(`flashcardsState_${userId}`);
-    const streaksState = localStorage.getItem(`streaksState_${userId}`);
+    const states = ['user', 'tasks', 'flashcards', 'streaks'].reduce((acc, key) => {
+      try {
+        const state = localStorage.getItem(`${key}State_${userId}`);
+        acc[key] = state ? JSON.parse(state) : undefined;
+      } catch (e) {
+        console.error(`Error parsing ${key} state:`, e);
+        acc[key] = undefined;
+      }
+      return acc;
+    }, {});
     
-    return {
-      user: userState ? JSON.parse(userState) : undefined,
-      tasks: tasksState ? JSON.parse(tasksState) : undefined,
-      flashcards: flashcardsState ? JSON.parse(flashcardsState) : undefined,
-      streaks: streaksState ? JSON.parse(streaksState) : undefined
-    };
+    return states;
   } catch (e) {
-    console.error('Error loading state from localStorage:', e);
+    console.error('Error loading state:', e);
     return {};
   }
 };
@@ -41,5 +43,10 @@ export const store = configureStore({
   },
   preloadedState: loadState(),
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(localStorageMiddleware),
+    getDefaultMiddleware({
+      serializableCheck: {
+        // Ignore these action types
+        ignoredActions: ['persist/PERSIST'],
+      },
+    }).concat(localStorageMiddleware),
 });

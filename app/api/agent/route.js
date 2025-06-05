@@ -43,7 +43,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
     let prompt = `
     You are ZEYN (Zero Entropy Yielding Nexus), an advanced AI assistant within a gamified productivity app called LevelDeck.
@@ -199,13 +199,6 @@ export default async function handler(req, res) {
       title: "System Disruption",
       message: "Connection unstable. Entropy increasing. Retry when signal stabilizes.",
       suggestion: "Continue with planned trajectory. Will reconnect when possible."
-    });
-  } catch (error) {
-    console.error('AI Agent Error:', error);
-    res.status(500).json({
-      error: 'AI service error',
-      code: 'AI_ERROR',
-      message: error.message
     });
   }
 }
