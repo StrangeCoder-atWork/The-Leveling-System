@@ -1,11 +1,10 @@
 
 "use client"
 import "./home.css"
-import Cards from '../components/Cards'
+import React, { useState, useEffect, useRef } from "react";
+import Cards from '../components/Cards';
 import { useTheme } from "../context/ThemeContext";
-import { useState, useEffect, useRef } from "react";
-import { themes } from '@/data/themes'
-import React from 'react'
+import { themes } from '@/data/themes';
 import Image from "next/image";
 import { useSelector } from 'react-redux';
 import Intro from "../components/Intro";
