@@ -64,67 +64,13 @@ const Home = () => {
     setShowIntro(false);
     localStorage.setItem('introShown', 'true');
   };
-  useEffect(() => {
-    // Stop any existing audio when theme changes
-    if (alarmRef.current) {
-      alarmRef.current.pause();
-      alarmRef.current = null;
-    }
-    
-    // Play new theme audio if available
-    if (current.audio) {
-      const audio = new Audio(current.audio);
-      audio.loop = true;
-      audio.volume = 0.5; // Lower volume for better user experience
-      
-      // Check if user has interacted with the page
-      const hasInteracted = document.querySelectorAll('button, a, input').length > 0 && 
-                         localStorage.getItem('userInteracted') === 'true';
-      
-      // Only attempt to play if there's been interaction
-      if (hasInteracted) {
-        const playPromise = audio.play();
-        
-        if (playPromise !== undefined) {
-          playPromise
-            .then(() => {
-              // Playback started successfully
-              alarmRef.current = audio;
-            })
-            .catch(err => {
-              console.error("Audio play failed:", err);
-              // Don't set alarmRef.current since playback failed
-            });
-        }
-      } else {
-        // Store audio for later playback
-        alarmRef.current = audio;
-      }
-    }
-    
-    // Cleanup function to stop audio when component unmounts
-    return () => {
-      if (alarmRef.current) {
-        alarmRef.current.pause();
-        alarmRef.current = null;
-      }
-    };
-  }, [current.audio, theme]);
   
   // Add this effect to detect user interaction
   useEffect(() => {
     const handleInteraction = () => {
       localStorage.setItem('userInteracted', 'true');
       
-      // Try to play audio if it was loaded but not playing
-      // if (alarmRef.current && current.audio) {
-      //   const playPromise = alarmRef.current.play();
-        
-      //   if (playPromise !== undefined) {
-      //     playPromise.catch(err => {
-      //       console.error("Audio play failed after interaction:", err);
-      //     });
-        // }
+
       };
     // };
     
