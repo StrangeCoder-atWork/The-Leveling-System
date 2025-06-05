@@ -8,9 +8,26 @@ import { themes } from '@/data/themes';
 export default function Intro({ onComplete }) {
   const [step, setStep] = useState(1);
   const [showContinue, setShowContinue] = useState(false);
+  const [currentTextIndex, setCurrentTextIndex] = useState(0); // New state for sequential text
   const { theme } = useTheme();
   const currentTheme = themes[theme];
   const audioRef = useRef(null);
+
+  const introTexts = [
+    "🗡️ \"This world does not reward the loudest.",
+    "Not the fastest. Not the luckiest.",
+    "It rewards the ones who show up when no one is watching.",
+    "Who rise even when it feels impossible.",
+    "Who carry the blade… even when it’s heavy.\"",
+    "💠 You were not born extraordinary.",
+    "You chose to become it.",
+    "And now — your journey begins.",
+    "Not to chase someone else's path…",
+    "…but to carve your own.",
+    "Welcome, warrior.",
+    "This is your story.",
+    "This is your rise."
+  ];
 
   useEffect(() => {
     // Play theme audio if available
@@ -21,27 +38,37 @@ export default function Intro({ onComplete }) {
       audio.play().catch((err) => console.error("Intro audio play failed:", err));
       audioRef.current = audio;
     }
-    
-    // Show first text for 7 seconds
-    const timer1 = setTimeout(() => {
-      setStep(2);
-    }, 7000);
 
-    // Show second text for 7 seconds
-    const timer2 = setTimeout(() => {
+    let timers = [];
+
+    // Display intro texts sequentially
+    introTexts.forEach((text, index) => {
+      const delay = index * 2000; // 2 seconds per line
+      timers.push(setTimeout(() => {
+        setCurrentTextIndex(index);
+      }, delay));
+    });
+
+    // After all intro texts, transition to step 2
+    const totalIntroTextTime = introTexts.length * 2000; // Total time for all intro texts
+    timers.push(setTimeout(() => {
+      setStep(2);
+    }, totalIntroTextTime));
+
+    // Show continue button after step 2 text is displayed
+    timers.push(setTimeout(() => {
       setShowContinue(true);
-    }, 14000);
+    }, totalIntroTextTime + 2000)); // 2 seconds after step 2 starts
 
     return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
+      timers.forEach(timer => clearTimeout(timer));
       // Stop audio when component unmounts
       if (audioRef.current) {
         audioRef.current.pause();
         audioRef.current = null;
       }
     };
-  }, [currentTheme.audio]);
+  }, [currentTheme.audio, introTexts.length]);
 
   const handleContinue = () => {
     onComplete();
@@ -71,13 +98,19 @@ export default function Intro({ onComplete }) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0, transition: { duration: 1.5, ease: "easeOut" } }}
               transition={{ duration: 1 }}
-              className="FullIntroText"
+              className="FullIntroText flex flex-col justify-center items-center h-full"
             >
-              <h1 className="IntroshortText">Welcome to LevelDeck</h1>
-              <div className="flex justify-center items-center">
-                <div className="glowIntroL w-1 h-1 bg-blue-500 rounded-full mr-4"></div>
-                <div className="glowIntroR w-1 h-1 bg-purple-500 rounded-full ml-4"></div>
-              </div>
+              {introTexts.slice(0, currentTextIndex + 1).map((text, index) => (
+                <motion.p
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="text-xl md:text-2xl font-bold text-white mb-2"
+                >
+                  {text}
+                </motion.p>
+              ))}
             </motion.div>
           )}
 
@@ -90,7 +123,7 @@ export default function Intro({ onComplete }) {
               className="introText"
             >
               <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-                Your Journey Begins Now
+                Your Journey Begins
               </h1>
               <p className="text-xl md:text-2xl text-white/80 mb-8">
                 Transform your productivity into an epic adventure
@@ -105,7 +138,7 @@ export default function Intro({ onComplete }) {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Begin Your Quest
+                  Begin Your Journey
                 </motion.button>
               )}
             </motion.div>
