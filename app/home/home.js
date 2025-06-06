@@ -46,6 +46,9 @@ const Home = () => {
   const current = themes[theme['theme']];
   const { color, glow } = getRankStyle(rank, theme.theme);
   const alarmRef= useRef(null)
+  const [showDayRitual, setShowDayRitual] = useState(false);
+  const [dailyQuote, setDailyQuote] = useState('');
+  const [streakDays, setStreakDays] = useState(0);
 
   useEffect(() => {
     const setupCompleted = localStorage.getItem('setupCompleted');
@@ -91,80 +94,97 @@ const Home = () => {
   
   return (
     <div className="">
-   
       {showIntro && <Intro onComplete={handleIntroComplete} />}
-      {/* <AgentPanel section="home" /> */}
-
-      <div className={`${current.main} overflow-hidden`}>
-        {current.vid!=""&& <video
-        src={current.vid}
-          autoPlay
-          loop
-          muted
-          className={`${current.mythical} absolute top-0 left-0 min-h-screen min-w-screen object-cover z-0`}
-        >
-        </video>}
-        <div className={current.LevelRank}>
-          <div className={current.Status}>
-            <div className={current.rank} style={{ position: "relative" }}>
-                
-                  <Image
-                    src={current.platform_img || '/platform.png'}
-                    alt="platform"
-                    className={current.platform}
-                    width={300}
-                    height={300}
-                  />
-              <p
-                className={`${current.rank_letter} relative `}
-              >  {rank}
-              </p>
-              <div
-                className={current.glow_aura}
-              />
-            </div>
-          <div className={current.level}>
-            <Image
-              className={current.level_css}
-              src={current.level_img || '/levelimg.png'}
-              alt="level"
-              width={250}
-              height={300}
-            />
-            <div className={current.level_letter}>{level}</div>
-          </div>
-          </div>
-
       
+      {/* Core Motivation Features */}
+      <div className="flex flex-col items-center mt-4 mb-6">
+        <div className="w-full max-w-4xl px-4">
+          {/* ZEYN Quote of the Day */}
+          <div className="text-center mb-6 text-xl font-semibold text-white/90 italic">
+            {dailyQuote || "Loading daily wisdom..."}
+          </div>
 
-      <div className={current.progress}>
-        <Cards title="Progress" link="/Progress" />
-        <Cards title="Daily Quest" link="/DailyQuest" />
-        <Cards title="Big Quest" link="/BigQuest" />
-        <Cards title="Flash Card" link="/FlashCard" />
-        <Cards title="Paper Analysis" link="/PaperAnalysis" />
-        <Cards title="Store" link="/Store" />
-        <Cards title="Journal" link="/Journal" />
-        </div>
-        </div>
-        <div className={current.profile}>
-        {current.charct!="" && <video
-        src={current.charct}
-          autoPlay
-          loop
-          muted
-          className={current.character_css}
-        >
-        </video>}
-          {current.character!=""&& (<Image
-            className={current.character_css}
-            src={current.character}
-            alt="character"
-            width={350}
-            height={200}
-          />)}
+          {/* Progress Section */}
+          <div className="flex items-start gap-4 mb-6">
+            <div className="flex-1">
+              <XPBar showAura={true} />
+              <div className="mt-2">
+                <CharacterEvolutionMeter />
+              </div>
+            </div>
+            
+            {/* Streak Tracker */}
+            <div className="bg-gradient-to-br from-indigo-900/30 to-purple-900/30 p-4 rounded-lg">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-yellow-400">{streakDays}</div>
+                <div className="text-sm text-gray-300">Day Streak</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
+      {/* Main Content Area */}
+      <div className="relative flex min-h-screen">
+        {/* Left Side - Goals & Timer */}
+        <div className="w-1/4 p-4">
+          <RemainingGoals />
+          <FocusTimer />
+        </div>
+
+        {/* Center - Main Content */}
+        <div className="flex-1">
+          <div className={`${current.main} overflow-hidden relative`}>
+            {/* Theme Particles Overlay */}
+            <ParticlesOverlay theme={current} />
+            
+            {/* Character with Aura */}
+            <div className="relative">
+              {current.vid && <video src={current.vid} />}
+              <CharacterAura active={xpIncreased} />
+            </div>
+            
+            {/* Theme Lore Button */}
+            <button 
+              className="absolute bottom-4 right-4 bg-black/40 p-2 rounded-full"
+              onClick={() => setShowLore(true)}>
+              📜
+            </button>
+          </div>
+        </div>
+
+        {/* Right Side - Utilities */}
+        <div className="w-1/4 p-4">
+          <MiniCalendar />
+          <FlashcardReminder />
+          <ShopTeaser />
+        </div>
+      </div>
+
+      {/* ZEYN Chat Bubble */}
+      <div className="fixed bottom-4 right-4">
+        <AgentPanel section="home" compact={true} />
+      </div>
+
+      {/* Overlays */}
+      {showDayRitual && (
+        <DayRitualOverlay 
+          onClose={() => setShowDayRitual(false)}
+          rank={rank}
+          xp={xp}
+          tasks={tasks}
+        />
+      )}
+      
+      {showLore && (
+        <ThemeLorePanel 
+          theme={current}
+          onClose={() => setShowLore(false)}
+        />
+      )}
+
+      {/* Level Up Animation */}
+      <RankUpAnimation show={showRankUp} rank={rank} />
     </div>
   );
 };
