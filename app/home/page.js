@@ -3,7 +3,7 @@ import React from 'react'
 import {getServerSession} from "next-auth/next"
 import { authOptions } from "../api/auth/[...nextauth]/route"
 import {redirect} from "next/navigation"
-import "./home.css"
+
 import Cards from '../components/Cards'
 import dynamic from "next/dynamic";
 
