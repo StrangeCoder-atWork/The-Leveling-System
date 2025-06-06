@@ -61,40 +61,36 @@ export default function DailyQuestPage() {
  
   
   useEffect(() => {
-    // Load tasks from Redux store first, then fallback to localStorage
     const userId = localStorage.getItem('currentUserId');
-    const tasksArray = Object.values(reduxTasks);
+    const tasksArray = Object.values(reduxTasks || {});
     
-    if (tasksArray.length > 0) {
-      setTasks(tasksArray);
-    } else {
-      // Fallback to localStorage if Redux store is empty
+    if (tasksArray.length === 0) {
       const tasksData = JSON.parse(localStorage.getItem(`tasksState_${userId}`) || '{}');
       const localTasksArray = Array.isArray(tasksData.tasks) ? tasksData.tasks : [];
       setTasks(localTasksArray);
-      
-      // Also update Redux store with localStorage data
       dispatch(setTasks(localTasksArray.reduce((obj, task) => {
         obj[task.id] = task;
         return obj;
       }, {})));
+      
+      const { completed, xp, money } = calculateStats(localTasksArray);
+      setCompletedTasks(completed);
+      setTotalXP(xp);
+      setTotalMoney(money);
+    } else {
+      setTasks(tasksArray);
+      const { completed, xp, money } = calculateStats(tasksArray);
+      setCompletedTasks(completed);
+      setTotalXP(xp);
+      setTotalMoney(money);
     }
-    
-    // Calculate stats
-    const statsTasksArray = tasksArray.length > 0 ? tasksArray : [];
-    const { completed, xp, money } = calculateStats(statsTasksArray);
-    setCompletedTasks(completed);
-    setTotalXP(xp);
-    setTotalMoney(money);
-
-    // Load streak data for AI suggestions
+  
     const streakData = JSON.parse(localStorage.getItem(`streakData_${userId}`) || '{ "currentStreak": 0, "longestStreak": 0 }');
     setStreakData(streakData);
-
-    // Load habits for AI suggestions
+  
     const habits = JSON.parse(localStorage.getItem(`habits_${userId}`) || '[]');
     setHabits(habits);
-  }, [calculateStats, dispatch, reduxTasks]);
+  }, [calculateStats])
 
   // Track theme changes to show intro
   
@@ -130,6 +126,12 @@ export default function DailyQuestPage() {
     setShowTaskPanel(false);
   };
 
+  const debouncedSave = useCallback(
+    debounce((userId, data) => {
+      localStorage.setItem(`tasksState_${userId}`, JSON.stringify({ tasks: data }));
+    }, 300),
+    []
+  );
   const handleTaskUpdate = (updatedTask) => {
     const updatedTasks = tasks.map(task => 
       task.id === updatedTask.id ? updatedTask : task
@@ -191,16 +193,10 @@ export default function DailyQuestPage() {
   };
 
   // Create a debounced save function
-  const debouncedSave = useCallback(
-    debounce((userId, data) => {
-      localStorage.setItem(`tasksState_${userId}`, JSON.stringify({ tasks: data }));
-    }, 300),
-    []
-  );
   
   return (
     <div 
-      className={`min-h-screen pt-16 ${current.main}`}
+      className={`min-h-screen pt-16 transition-all duration-700 ease-in-out ${current.main}`}
       style={{
         backgroundImage: current.backgroundImage ? `url(${current.backgroundImage})` : 'none',
         backgroundSize: 'cover',
