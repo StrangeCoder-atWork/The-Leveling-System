@@ -63,21 +63,26 @@ export default function DailyQuestPage() {
   useEffect(() => {
     const userId = localStorage.getItem('currentUserId');
     const tasksArray = Object.values(reduxTasks || {});
-    
+  
     if (tasksArray.length === 0) {
+      // Load tasks from localStorage only once when reduxTasks is empty (first mount)
       const tasksData = JSON.parse(localStorage.getItem(`tasksState_${userId}`) || '{}');
       const localTasksArray = Array.isArray(tasksData.tasks) ? tasksData.tasks : [];
+  
       setTasks(localTasksArray);
-      dispatch(setTasks(localTasksArray.reduce((obj, task) => {
-        obj[task.id] = task;
-        return obj;
-      }, {})));
-      
+      if (localTasksArray.length > 0) {
+        dispatch(setTasks(localTasksArray.reduce((obj, task) => {
+          obj[task.id] = task;
+          return obj;
+        }, {})));
+      }
+  
       const { completed, xp, money } = calculateStats(localTasksArray);
       setCompletedTasks(completed);
       setTotalXP(xp);
       setTotalMoney(money);
     } else {
+      // If reduxTasks already has tasks, just update React state accordingly
       setTasks(tasksArray);
       const { completed, xp, money } = calculateStats(tasksArray);
       setCompletedTasks(completed);
@@ -85,12 +90,14 @@ export default function DailyQuestPage() {
       setTotalMoney(money);
     }
   
+    // Load streak data and habits (same as before)
     const streakData = JSON.parse(localStorage.getItem(`streakData_${userId}`) || '{ "currentStreak": 0, "longestStreak": 0 }');
     setStreakData(streakData);
   
     const habits = JSON.parse(localStorage.getItem(`habits_${userId}`) || '[]');
     setHabits(habits);
-  }, [calculateStats])
+  
+  }, []); 
 
   // Track theme changes to show intro
   
