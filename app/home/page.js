@@ -7,7 +7,7 @@ import "./home.css"
 import Cards from '../components/Cards'
 import dynamic from "next/dynamic";
 
-const Home_design = dynamic(() => import("../components/home"), { ssr: false });
+const Home_design = dynamic(() => import("../components/home.js"), { ssr: false });
 
 export default function Page(props) {
   return <Home_design {...props} />;
