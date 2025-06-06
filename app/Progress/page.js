@@ -46,6 +46,49 @@ export default function ProgressPage() {
     loadStreakData();
   }, [dispatch, isOnline]);
 
+  // Process streak history for graph data
+  useEffect(() => {
+    if (streakHistory && Object.keys(streakHistory).length > 0) {
+      const dates = [];
+      const workoutData = [];
+      const studyData = [];
+      const workData = [];
+
+      // Assuming streakHistory is an object where keys are dates and values are arrays of activities
+      // Example: { '2023-01-01': [{ activity: 'workout', completed: true }], '2023-01-02': [...] }
+      const sortedDates = Object.keys(streakHistory).sort();
+
+      sortedDates.forEach(date => {
+        dates.push(date);
+        let workoutCount = 0;
+        let studyCount = 0;
+        let workCount = 0;
+
+        streakHistory[date].forEach(entry => {
+          if (entry.completed) {
+            if (entry.activity === 'workout') {
+              workoutCount++;
+            } else if (entry.activity === 'study') {
+              studyCount++;
+            } else if (entry.activity === 'work') {
+              workCount++;
+            }
+          }
+        });
+        workoutData.push(workoutCount);
+        studyData.push(studyCount);
+        workData.push(workCount);
+      });
+
+      setGraphData({
+        dates: dates,
+        workout: workoutData,
+        study: studyData,
+        work: workData,
+      });
+    }
+  }, [streakHistory]);
+
   const markActivityDone = async (activity) => {
     const today = new Date().toISOString().split('T')[0];
     

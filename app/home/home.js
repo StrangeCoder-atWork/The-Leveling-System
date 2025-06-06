@@ -9,7 +9,7 @@ import Image from "next/image";
 import { useSelector } from 'react-redux';
 import Intro from "../components/Intro";
 import AgentPanel from "../components/AgentPanel";
-
+import XPBar from "../components/XPBar";
 // Dynamic rank style function
 const getRankStyle = (rank, theme) => {
   const baseColors = {
