@@ -2,16 +2,16 @@
 "use client"
 import "./home.css"
 import React, { useState, useEffect, useRef } from "react";
-import Cards from '../components/Cards';
+import Cards from './Cards';
 import { useTheme } from "../context/ThemeContext";
 import { themes } from '@/data/themes';
 import Image from "next/image";
 import { useSelector } from 'react-redux';
-import Intro from "../components/Intro";
-import AgentPanel from "../components/AgentPanel";
-import AgentQuote from "../components/AgentQuote";
-import XPBar from "../components/XPBar";
-import CharacterEvolutionMeter from "../components/CharacterEvolutionMeter";
+import Intro from "./Intro";
+import AgentPanel from "./AgentPanel";
+import AgentQuote from "./AgentQuote";
+import XPBar from "./XPBar";
+import CharacterEvolutionMeter from "./CharacterEvolutionMeter";
 import { motion, AnimatePresence } from 'framer-motion';
 
 // Dynamic rank style function
