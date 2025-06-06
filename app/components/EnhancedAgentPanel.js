@@ -33,7 +33,6 @@ export default function EnhancedAgentPanel() {
     e.preventDefault();
     if (!input.trim()) return;
 
-    // Add user message
     const userMessage = {
       sender: 'user',
       text: input,
@@ -45,6 +44,10 @@ export default function EnhancedAgentPanel() {
 
     try {
       const userProfile = getUserProfile();
+      if (!userProfile) {
+        throw new Error('User not logged in');
+      }
+
       const response = await askAgentPersonalized('chat', {
         ...userProfile,
         message: input,
@@ -52,19 +55,20 @@ export default function EnhancedAgentPanel() {
         type: 'conversation'
       });
 
-      // Add agent response
       const agentMessage = {
         sender: 'agent',
-        text: response.message || "Anomaly detected. Recalibrating response parameters.",
+        text: response.message,
         timestamp: new Date().toISOString()
       };
       setMessages(prev => [...prev, agentMessage]);
+
     } catch (error) {
       console.error('Error getting AI response:', error);
-      // Add error message
       const errorMessage = {
         sender: 'agent',
-        text: "Connection disrupted. Entropy increased. Retry when stability returns.",
+        text: error.message === 'User not logged in' 
+          ? "Access denied. Authentication required."
+          : "Connection disrupted. Entropy increased. Retry when stability returns.",
         timestamp: new Date().toISOString()
       };
       setMessages(prev => [...prev, errorMessage]);
