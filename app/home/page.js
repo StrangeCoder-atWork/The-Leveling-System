@@ -5,8 +5,13 @@ import { authOptions } from "../api/auth/[...nextauth]/route"
 import {redirect} from "next/navigation"
 import "./home.css"
 import Cards from '../components/Cards'
-import Home_design from "./home"
+import dynamic from "next/dynamic";
 
+const Home_design = dynamic(() => import("./home"), { ssr: false });
+
+export default function Page(props) {
+  return <Home_design {...props} />;
+}
 const Home = async () => {
     
   // const session = await getServerSession(authOptions);
@@ -20,5 +25,3 @@ const Home = async () => {
     </> 
   )
 }
-
-export default Home
