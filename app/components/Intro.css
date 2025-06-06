@@ -58,7 +58,7 @@
 	transition: linear 1s;
 	animation: blink1 5s 1 alternate;
 	color: white;
-	font-size: 70px;
+	font-size: 50px;
 	text-shadow: 0 0 10px rgba(255, 255, 255, 0.7),
                0 0 20px rgba(59, 130, 246, 0.5),
                0 0 30px rgba(168, 85, 247, 0.3);
