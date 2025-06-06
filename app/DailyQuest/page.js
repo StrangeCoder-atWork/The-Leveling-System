@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import TimeGrid from '../components/TimeGrid';
 import TaskCreationPanel from '../components/TaskCreationPanel';
@@ -31,29 +31,7 @@ function debounce(func, wait) {
   };
 }
 
-// Theme intro animations using framer-motion
-const themeIntroVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: { 
-      duration: 0.8, 
-      ease: "easeOut" 
-    } 
-  },
-  exit: { 
-    opacity: 0, 
-    y: -50,
-    transition: { 
-      duration: 0.5, 
-      ease: "easeIn" 
-    } 
-  }
-};
 
-// Remove the theme intro animations (around line 30-45)
-// Delete this entire themeIntroVariants block
 
 export default function DailyQuestPage() {
   const dispatch = useDispatch();
@@ -78,16 +56,9 @@ export default function DailyQuestPage() {
   const [totalMoney, setTotalMoney] = useState(0);
   const [streakData, setStreakData] = useState({ currentStreak: 0, longestStreak: 0 });
   const [habits, setHabits] = useState([]);
-  // Remove these state variables
-  // const [showThemeIntro, setShowThemeIntro] = useState(false);
-  // const [previousTheme, setPreviousTheme] = useState(null);
+ 
   
-  const filteredTasks = useMemo(() => {
-    return tasks.filter(task => {
-      // Your filtering logic here
-      return true; // Replace with actual filtering
-    });
-  }, [tasks]);
+ 
   
   useEffect(() => {
     // Load tasks from Redux store first, then fallback to localStorage
@@ -227,22 +198,6 @@ export default function DailyQuestPage() {
     []
   );
   
-  // Get theme story content for intro
-  const getThemeIntroContent = () => {
-    if (!current) return { title: '', description: '', story: '' };
-    
-    const themeKey = theme;
-    const formattedTitle = themeKey.replace('_', ' ');
-    
-    return {
-      title: formattedTitle,
-      description: current.description || '',
-      story: current.story || ''
-    };
-  };
-  
-  const themeContent = getThemeIntroContent();
-  
   return (
     <div 
       className={`min-h-screen pt-16 ${current.main}`}
@@ -264,8 +219,6 @@ export default function DailyQuestPage() {
         </video>
       )}
       
-      {/* Remove the Theme Intro Animation section (around line 270-320) */}
-      {/* Delete the entire AnimatePresence block with showThemeIntro */}
       
       {/* Add min-h-screen to this div */}
       <div className="min-h-screen bg-black/50 backdrop-blur-sm p-4">
@@ -402,7 +355,3 @@ export default function DailyQuestPage() {
     </div>
   );
 }
-
-// Remove the getThemeIntroContent function (around line 230-240)
-// Delete the entire getThemeIntroContent function and themeContent constant
-

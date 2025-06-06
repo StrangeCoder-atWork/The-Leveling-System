@@ -146,7 +146,7 @@ export default function ThemesPage() {
                   <div 
                     className="absolute inset-0 w-full h-full" 
                     style={{ 
-                      backgroundImage: `url(${theme.backgroundImage || '/bg3.jpg'})`,
+                      backgroundImage: `url(${theme.backgroundImage || '/Spacebg1.jpg'})`,
                       backgroundSize: 'cover',
                       backgroundPosition: 'center'
                     }}
