@@ -200,7 +200,7 @@ export default function TimeGrid({ view, tasks, onTaskComplete, onCellClick, onT
                     key={task.id}
                     task={task}
                     style={{
-                      position: 'absolute',
+                      position: 'relative',
                       top: `${top}px`,
                       left: `${left}px`,
                       width: `${columnWidth}px`,
