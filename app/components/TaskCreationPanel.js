@@ -60,7 +60,7 @@ export default function TaskCreationPanel({ time, onTaskCreate, onCancel }) {
         />
       </div>
       
-      <div className="grid grid-cols-2 gap-4">
+
         <div>
           <label className="block text-white text-sm font-medium mb-1">XP Reward</label>
           <input 
@@ -82,7 +82,6 @@ export default function TaskCreationPanel({ time, onTaskCreate, onCancel }) {
             onChange={(e) => setMoney(Math.max(0, Number(e.target.value)))} 
           />
         </div>
-      </div>
       
       <div className="grid grid-cols-2 gap-4">
         <div>

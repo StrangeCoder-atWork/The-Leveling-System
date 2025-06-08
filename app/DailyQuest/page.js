@@ -94,7 +94,7 @@ export default function DailyQuestPage() {
     const streakData = JSON.parse(localStorage.getItem(`streakData_${userId}`) || '{ "currentStreak": 0, "longestStreak": 0 }');
     setStreakData(streakData);
   
-    const habits = JSON.parse(localStorage.getItem(`habits_${userId}`) || '[]');
+    const habits = JSON.parse(localStorage.getItem(`habits_${userId}`) || '[]'); 
     setHabits(habits);
   
   }, []); 
