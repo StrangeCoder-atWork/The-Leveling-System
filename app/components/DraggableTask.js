@@ -110,7 +110,7 @@ export default function DraggableTask({ task, style, onComplete, onUpdate, gridV
       className={`task-container rounded-md ${task.completed ? 'bg-gray-700/80' : 'bg-gray-800/90'} backdrop-blur-sm p-2 shadow-lg`}
       style={style}
       drag
-      dragConstraints={{ top: 0, left: 0, right: 0, bottom: 1440 }} // Reverted to original value
+      dragConstraints={{ top: -Infinity, left: 0, right: 0, bottom: Infinity }} // Allow full vertical dragging
       dragElastic={0.05} // Reduced elasticity for better control
       dragMomentum={false} // Disable momentum for precise positioning
       dragTransition={{ 
